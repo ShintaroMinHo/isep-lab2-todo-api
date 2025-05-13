@@ -1,36 +1,33 @@
 ﻿package org.isep.cleancode.application;
 
 import org.isep.cleancode.Todo;
-import org.isep.cleancode.persistence.TodoRepository;
-
 import java.util.List;
 
 public class TodoManager {
+    private final ITodoRepository repository;
 
-    private final TodoRepository repository;
-
-    public TodoManager(TodoRepository repository) {
+    public TodoManager(ITodoRepository repository) {
         this.repository = repository;
     }
 
-    public void addTodo(Todo todo) throws Exception {
-        if (todo.getName() == null || todo.getName().trim().isEmpty()) {
-            throw new Exception("Todo name is required.");
+    public String addTodo(Todo todo) {
+        if (!todo.isValid()) {
+            return "Invalid name: required and < 64 characters";
         }
 
-        if (todo.getName().length() >= 64) {
-            throw new Exception("Todo name must be shorter than 64 characters.");
+        if (!todo.isDueDateValid()) {
+            return "Invalid due date format. Expected format: YYYY-MM-DD";
         }
 
-        if (repository.getAllTodos().stream().anyMatch(t -> t.getName().equalsIgnoreCase(todo.getName()))) {
-            throw new Exception("Todo name must be unique.");
+        if (repository.existsByName(todo.getName())) {
+            return "Todo with the same name already exists";
         }
 
-        repository.addTodo(todo);
+        repository.add(todo);
+        return null;
     }
 
     public List<Todo> getAllTodos() {
-        return repository.getAllTodos();
+        return repository.getAll();
     }
 }
-

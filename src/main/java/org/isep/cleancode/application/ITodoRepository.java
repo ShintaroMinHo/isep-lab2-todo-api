@@ -4,6 +4,7 @@ import org.isep.cleancode.Todo;
 import java.util.List;
 
 public interface ITodoRepository {
-    void addTodo(Todo todo);
-    List<Todo> getAllTodos();
+    void add(Todo todo);
+    List<Todo> getAll();
+    boolean existsByName(String name);
 }

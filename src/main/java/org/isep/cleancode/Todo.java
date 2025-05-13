@@ -1,5 +1,7 @@
 package org.isep.cleancode;
 
+import java.time.LocalDate;
+
 public class Todo {
 
     // this Todo class should be completed to achieve Step 1
@@ -26,6 +28,19 @@ public class Todo {
 
     public void setDueDate(String dueDate) {
         this.dueDate = dueDate;
+    }
+    public boolean isValid() {
+        return name != null && name.length() < 64;
+    }
+
+    public boolean isDueDateValid() {
+        if (dueDate == null || dueDate.isEmpty()) return true;
+        try {
+            LocalDate.parse(dueDate);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 }

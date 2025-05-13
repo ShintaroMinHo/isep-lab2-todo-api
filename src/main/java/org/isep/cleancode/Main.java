@@ -1,11 +1,12 @@
 package org.isep.cleancode;
 
 import static spark.Spark.*;
-import com.google.gson.Gson;
+import org.isep.cleancode.persistence.TodoRepository;
 import org.isep.cleancode.presentation.TodoController;
 
 public class Main {
-    private static final TodoController todoController = new TodoController();
+    static TodoRepository rsp = new TodoRepository();
+    private static final TodoController todoController = new TodoController(rsp);
 
     public static void main(String[] args) {
         port(4567);
@@ -14,5 +15,6 @@ public class Main {
 
         post("/todos", todoController::createTodo);
     }
+
 }
 
