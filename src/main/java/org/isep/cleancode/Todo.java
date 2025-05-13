@@ -9,8 +9,9 @@ public class Todo {
     private String name;
     private String dueDate; // ISO format, e.g., "2025-05-13"
 
-    public Todo(String name) {
+    public Todo(String name, String dueDate) {
         this.name = name;
+        this.dueDate = dueDate;
     }
 
     public String getName() {
