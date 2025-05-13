@@ -5,6 +5,7 @@ public class Todo {
     // this Todo class should be completed to achieve Step 1
 
     private String name;
+    private String dueDate; // ISO format, e.g., "2025-05-13"
 
     public Todo(String name) {
         this.name = name;
@@ -17,4 +18,14 @@ public class Todo {
     public void setName(String name) {
         this.name = name;
     }
+
+
+    public String getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(String dueDate) {
+        this.dueDate = dueDate;
+    }
+
 }
